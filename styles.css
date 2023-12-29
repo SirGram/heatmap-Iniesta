@@ -1,0 +1,49 @@
+html{
+    background-color: whitesmoke;
+    
+}
+body{
+  margin: 0;
+}
+
+.container {
+  width: 1540px;
+  height: 280px;
+  position: relative;
+}
+#chart {
+  max-height: 100%;
+  max-width: 100%;
+}
+#controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.top {
+  margin-right: 20px;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#id-input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+#theme {
+  padding: 10px;
+  cursor: pointer;
+}
+
