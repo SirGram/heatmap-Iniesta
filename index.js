@@ -53,13 +53,13 @@ monthNames = [
 ];
 
 const daysOfWeek = [
-  "Saturday",
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
+  "Sábado",
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
 ];
 
 const API = "https://api.ajr.moe/logs?userId=";
