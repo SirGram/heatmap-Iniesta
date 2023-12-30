@@ -69,40 +69,72 @@ let jsonData = [];
 let chart;
 
 document.addEventListener("DOMContentLoaded", function () {
-  idDiv = document.querySelector("#id-input");
+  //Direct Search ID
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get("userId");
+  const downloadBoolean = urlParams.get("download")
 
-  buttonSubmit = document.querySelector("#btn-submit");
+  if (userId) {
+    
+    fetchData(userId);
 
-  buttonSubmit.addEventListener("click", function () {
-    let ID = idDiv.value;
-    console.log(idDiv);
+    if(downloadBoolean == "true"){
+      setTimeout(function(){
+        downloadChart()
+      }, 3000)
+    }
+  } else {
+    console.log("manual");
+    idDiv = document.querySelector("#id-input");
+    buttonSubmit = document.querySelector("#btn-submit");
 
-    fetch(API + ID)
-      .then((response) => {
-        return response.json(); // Return the Promise from response.json()
-      })
-      .then((data) => {
-        console.log(data); // Log the parsed JSON data
-        // Further processing of jsonData can be done here
-        jsonData = data;
+    buttonSubmit.addEventListener("click", function () {
+      let ID = idDiv.value;
 
-        // Process the data and update the chart
-        processDataAndRenderChart();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        // Handle errors if any
-      });
-  });
-  const themeButton = document.querySelector("#theme");  
-  const htmlElement = document.documentElement
-  htmlElement.style.filter = "invert(100%)"
+      fetchData(ID);
+    });
+  }
+
+  const themeButton = document.querySelector("#theme");
+  const htmlElement = document.documentElement;
+  htmlElement.style.filter = "invert(100%)";
   themeButton.addEventListener("click", function () {
-    console.log('click')
+    console.log("click");
 
-    htmlElement.style.filter = htmlElement.style.filter === "invert(100%)" ?  "invert(0%)":"invert(100%)" ;
-  })
+    htmlElement.style.filter =
+      htmlElement.style.filter === "invert(100%)"
+        ? "invert(0%)"
+        : "invert(100%)";
+  });
 });
+
+function fetchData(ID) {
+  fetch(API + ID)
+    .then((response) => {
+      return response.json(); // Return the Promise from response.json()
+    })
+    .then((data) => {
+      // Further processing of jsonData can be done here
+      jsonData = data;
+
+      // Process the data and update the chart
+      processDataAndRenderChart();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      // Handle errors if any
+    });
+}
+
+function downloadChart() {
+  console.log("downloading")
+  html2canvas(document.getElementById('chart')).then(function(canvas) {
+    var link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = 'chart.png';
+    link.click();
+  });
+}
 
 function processDataAndRenderChart() {
   if (typeof chart !== "undefined") {
@@ -135,10 +167,6 @@ function processDataAndRenderChart() {
 
       // Check if the date is already processed
       if (!processedDates.includes(dateString)) {
-        console.log("Processing Date:", dateString);
-        console.log("Day Index:", dayIndex);
-        console.log("Week Index:", weekIndex);
-        console.log("Points", dataPoint.puntos.toFixed(1));
         // Record the date
         processedDates.push(dateString);
 
@@ -152,7 +180,6 @@ function processDataAndRenderChart() {
 
         // Update heatmapData array with reversed month order
         heatmapData[dayIndex][weekIndex] += dataPoint.puntos.toFixed(1);
-        console.log(heatmapData);
 
         if (dataPoint.puntos > 0) {
           daysImmersed += 1;
@@ -197,7 +224,6 @@ function processDataAndRenderChart() {
     },
   };
 
-
   chart = new ApexCharts(document.querySelector("#chart"), options);
   chart.render();
 
@@ -218,6 +244,4 @@ function processDataAndRenderChart() {
       options.plotOptions.heatmap.radius === 0 ? 30 : 0;
     chart.updateOptions(options);
   });
-
- 
 }
