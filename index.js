@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(downloadBoolean == "true"){
       setTimeout(function(){
         downloadChart()
-      }, 3000)
+      }, 2000)
     }
   } else {
     console.log("manual");
@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const themeButton = document.querySelector("#theme");
   const htmlElement = document.documentElement;
-  htmlElement.style.filter = "invert(100%)";
   themeButton.addEventListener("click", function () {
     console.log("click");
 
@@ -206,11 +205,12 @@ function processDataAndRenderChart() {
     chart: {
       height: "100%",
       type: "heatmap",
+      background: 'white'
     },
     dataLabels: {
       enabled: false,
     },
-    colors: ["#c400ff"],
+    colors: ["#3bff00"],
     title: {
       text: "Inmersión 2023 AJR",
     },

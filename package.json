@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/SirGram/heatmap-Iniesta/issues"
   },
-  "homepage": "https://github.com/SirGram/heatmap-Iniesta#readme"
+  "homepage": "https://github.com/SirGram/heatmap-Iniesta#readme",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }
