@@ -159,7 +159,7 @@ function processDataAndRenderChart() {
 
   jsonData.forEach((dataPoint) => {
     const date = new Date(dataPoint.timestamp * 1000);
-    if (date.getFullYear() === 2023) {
+    if (date.getFullYear() === 2024) {
       const dateString = date.toISOString().split("T")[0];
       const dayIndex = date.getDay();
       const weekIndex = getWeekNumber(date);
@@ -212,7 +212,7 @@ function processDataAndRenderChart() {
     },
     colors: ["#3bff00"],
     title: {
-      text: "Inmersión 2023 AJR",
+      text: "Inmersión 2024 AJR",
     },
     xaxis: {
       categories: monthNames,
