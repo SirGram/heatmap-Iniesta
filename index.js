@@ -62,7 +62,7 @@ const daysOfWeek = [
   "Viernes",
 ];
 
-const API = "https://api.ajr.moe/logs?userId=";
+const API = "https://api.manabe.es/?user=";
 
 let jsonData = [];
 
